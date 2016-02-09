@@ -1,6 +1,7 @@
 require 'optparse'
 require 'json'
 require 'awesome_print'
+require 'pry'
 require 'active_support/inflector'
 
 require_relative 'cmd_utilities'

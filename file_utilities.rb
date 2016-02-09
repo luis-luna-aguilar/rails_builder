@@ -16,5 +16,13 @@ def remove_file_lines(filename, start, num)
   tmp.unlink
 end
 
-def find_line_for(text)
+def find_line_for(filename, text)
+  matching_line = nil
+  File.foreach(filename) do |line|
+    if line.include?(text)
+      matching_line = $.
+    end
+  end
+
+  matching_line
 end
