@@ -14,10 +14,10 @@
 ## Model
 * Add presence validations and its respective tests
 * Add factory test. (based on a shared test file that is copied to the project)
-' Add relationships and its respective tests
-' Add other kinds of validations and its respective tests
+- Add relationships and its respective tests
+- Add other kinds of validations and its respective tests
 
 ## Testing
 * Add base integration tests with Rspec & Capybara for the selected actions on each controller
 
-Note. ' Represents a Nice To Have
+Note. - Represents a Nice To Have
