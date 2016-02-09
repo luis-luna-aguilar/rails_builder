@@ -2,7 +2,7 @@ require_relative 'cleaners/api_cleaner'
 
 class RailsBuilder
 
-  SCAFFOLD_FLAGS = ["--no-stylesheets", "--no-assets", "--skip-routes"]
+  SCAFFOLD_FLAGS = ["--no-stylesheets", "--no-assets", "--no-helper", "--resource-route"]
   GENERATOR_CMD = "bundle exec rails g"
 
   def initialize(model_spec_hash, output_path)
@@ -36,7 +36,7 @@ class RailsBuilder
 
     def generate_files(model_name, model_fields, controller_name, controller_actions)
       if is_devise_model?(model_name)
-        # generate_user_fields(model_fields)
+        generate_user_fields(model_fields)
       else
         generate_standard_files(model_name, model_fields, controller_name, controller_actions)
       end
