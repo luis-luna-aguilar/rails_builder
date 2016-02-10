@@ -64,7 +64,7 @@ class RailsBuilder
       controller_file = "#{@output}/app/controllers/#{controller_name}_controller.rb"
 
       if @hash["has_api"]
-        NoApiCleaner.new(controller_file, controller_actions, controller_name).run
+        RailsStandardCleaner.new(controller_file, controller_actions, controller_name).run
       else
         ApiCleaner.new(controller_file, controller_actions, controller_name, @output).run
       end

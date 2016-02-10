@@ -1,8 +1,6 @@
-require_relative "../file_utilities"
+require_relative 'base_cleaner'
 
-class ApiCleaner
-
-  CONTROLLER_ACTIONS = %w(index new create edit update show destroy)
+class ApiCleaner < BaseCleaner
 
   JSON_LINES_TO_REMOVE = [5,10,23,26,28,30,31,34,35,37,39,40,43,45,46,46]
 
@@ -16,13 +14,6 @@ class ApiCleaner
     "destroy" => { back: 1, lines: 6 }
   }
 
-  def initialize(file_path, actions, controller_name, project_path)
-    @file = file_path
-    @actions = actions
-    @controller = controller_name
-    @project_path = project_path
-  end
-
   def run
     cleanup_json_api_lines
     replace_api_texts
@@ -32,23 +23,6 @@ class ApiCleaner
 
   private
 
-    def remove_unused_files
-      actions_complement.each do |action|
-        delete_files_for( action )
-      end
-    end
-
-    def delete_files_for( action )
-      system( "cd #{@project_path} && rm app/views/#{@controller}/#{action}.html.slim" )
-    end
-
-    def cleanup_unused_actions
-      actions_complement.each do |action|
-        policies_hash = ACTION_REMOVAL_POLICIES[action]
-        line = find_line_for(@file, "def #{action}")
-        remove_file_lines(@file, (line - policies_hash[:back]), policies_hash[:lines])
-      end
-    end
 
     def replace_api_texts
       text = File.read(@file)
