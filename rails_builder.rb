@@ -88,7 +88,15 @@ class RailsBuilder
 
     def extract_model_fields_from(model_hash)
       model_hash["fields"].map do |field_hash|
-        "#{field_hash['name'].downcase}:#{field_hash['attr_type'].downcase}"
+        "#{field_hash['name'].downcase}:#{process_attr_type(field_hash['attr_type'])}"
+      end
+    end
+
+    def process_attr_type(attr_type)
+      if attr_type == "reference"
+        "references"
+      else
+        attr_type.downcase
       end
     end
 
@@ -99,7 +107,7 @@ class RailsBuilder
     end
 
     def filter_devise_fields_from(fields_array)
-      devise_fields = ["email", "password", "password_confirmation", "username"]
+      devise_fields = ["email", "password", "password_confirmation", "username", "role", "user_name"]
       fields_array.select { |f| not devise_fields.include?(f) }
     end
 
