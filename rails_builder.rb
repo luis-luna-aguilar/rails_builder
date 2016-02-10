@@ -1,4 +1,5 @@
 require_relative 'cleaners/api_cleaner'
+require_relative 'cleaners/rails_standard_cleaner'
 
 class RailsBuilder
 
